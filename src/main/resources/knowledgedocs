@@ -1,0 +1,81 @@
+If driver instance is AndroidDriver and if app is not installed then only DesiredCapability needed is "app" to launch the apk. Rest all set by default
+{
+  "capabilities": {
+    "platform": "LINUX",
+    "webStorageEnabled": false,
+    "takesScreenshot": true,
+    "javascriptEnabled": true,
+    "databaseEnabled": false,
+    "networkConnectionEnabled": true,
+    "locationContextEnabled": false,
+    "warnings": {},
+    "desired": {
+      "platformName": "android",
+      "app": "/Users/Aeepakattri/Desktop/appium-mobile-automation/src/main/resources/ApiDemos-debug.apk"
+    },
+    "platformName": "android",
+    "app": "/Users/Aeepakattri/Desktop/appium-mobile-automation/src/main/resources/ApiDemos-debug.apk",
+    "deviceName": "emulator-5554",
+    "deviceUDID": "emulator-5554",
+    "appPackage": "io.appium.android.apis",
+    "deviceApiLevel": 29,
+    "platformVersion": "10",
+    "deviceScreenSize": "1080x2280",
+    "deviceScreenDensity": 440,
+    "deviceModel": "Android SDK built for x86",
+    "deviceManufacturer": "Google",
+    "pixelRatio": 2.75,
+    "statBarHeight": 135,
+    "viewportRect": {
+      "left": 0,
+      "top": 135,
+      "width": 1080,
+      "height": 1842
+    }
+  }
+}
+
+
+When driver instance is of AppiumDriver and app is not installed Desired capabilities: app and platformName are mandatory to launch apk.
+
+{
+  "sessionId": "4a7b2d4b-2be1-41ff-aeb8-51e77563ba2e",
+  "value": {
+    "capabilities": {
+      "firstMatch": [
+        {
+          "platform": "LINUX",
+          "webStorageEnabled": false,
+          "takesScreenshot": true,
+          "javascriptEnabled": true,
+          "databaseEnabled": false,
+          "networkConnectionEnabled": true,
+          "locationContextEnabled": false,
+          "warnings": {},
+          "desired": {
+            "platformName": "android",
+            "app": "/Users/Aeepakattri/Desktop/appium-mobile-automation/src/main/resources/ApiDemos-debug.apk"
+          },
+          "platformName": "android",
+          "app": "/Users/Aeepakattri/Desktop/appium-mobile-automation/src/main/resources/ApiDemos-debug.apk",
+          "deviceName": "emulator-5554",
+          "deviceUDID": "emulator-5554",
+          "appPackage": "io.appium.android.apis"
+        }
+      ],
+      "alwaysMatch": {}
+    },
+    "sessionId": "4a7b2d4b-2be1-41ff-aeb8-51e77563ba2e"
+  }
+}
+
+If app is installed then appPackage and appActivity can be used to launch the app.
+
+
+UIAutomator2 v/s Espresso
+-If it is necessary to also interact with 3-rd party and system apps in the automated tests use UIAutomator2
+-Espresso is faster, maintained by google
+-Espresso :
+built-in view synchronization that ensures element finding happens during idle periods in your app.
+
+For iOS automationName, app, platformName, deviceName

@@ -1,0 +1,34 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+require("source-map-support/register");
+
+var _simulatorXcode = _interopRequireDefault(require("./simulator-xcode-10"));
+
+var _path = _interopRequireDefault(require("path"));
+
+var _utils = require("./utils.js");
+
+class SimulatorXcode11 extends _simulatorXcode.default {
+  constructor(udid, xcodeVersion) {
+    super(udid, xcodeVersion);
+  }
+
+  async getLaunchDaemonsRoot() {
+    const devRoot = await (0, _utils.getDeveloperRoot)();
+    return _path.default.resolve(devRoot, 'Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime/Contents/Resources/RuntimeRoot/System/Library/LaunchDaemons');
+  }
+
+}
+
+var _default = SimulatorXcode11;
+exports.default = _default;require('source-map-support').install();
+
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpYi9zaW11bGF0b3IteGNvZGUtMTEuanMiXSwibmFtZXMiOlsiU2ltdWxhdG9yWGNvZGUxMSIsIlNpbXVsYXRvclhjb2RlMTAiLCJjb25zdHJ1Y3RvciIsInVkaWQiLCJ4Y29kZVZlcnNpb24iLCJnZXRMYXVuY2hEYWVtb25zUm9vdCIsImRldlJvb3QiLCJwYXRoIiwicmVzb2x2ZSJdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7QUFBQTs7QUFDQTs7QUFDQTs7QUFHQSxNQUFNQSxnQkFBTixTQUErQkMsdUJBQS9CLENBQWdEO0FBQzlDQyxFQUFBQSxXQUFXLENBQUVDLElBQUYsRUFBUUMsWUFBUixFQUFzQjtBQUMvQixVQUFNRCxJQUFOLEVBQVlDLFlBQVo7QUFDRDs7QUFLRCxRQUFNQyxvQkFBTixHQUE4QjtBQUM1QixVQUFNQyxPQUFPLEdBQUcsTUFBTSw4QkFBdEI7QUFDQSxXQUFPQyxjQUFLQyxPQUFMLENBQWFGLE9BQWIsRUFDTCwwSkFESyxDQUFQO0FBRUQ7O0FBWjZDOztlQWVqQ04sZ0IiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgU2ltdWxhdG9yWGNvZGUxMCBmcm9tICcuL3NpbXVsYXRvci14Y29kZS0xMCc7XG5pbXBvcnQgcGF0aCBmcm9tICdwYXRoJztcbmltcG9ydCB7IGdldERldmVsb3BlclJvb3QgfSBmcm9tICcuL3V0aWxzLmpzJztcblxuXG5jbGFzcyBTaW11bGF0b3JYY29kZTExIGV4dGVuZHMgU2ltdWxhdG9yWGNvZGUxMCB7XG4gIGNvbnN0cnVjdG9yICh1ZGlkLCB4Y29kZVZlcnNpb24pIHtcbiAgICBzdXBlcih1ZGlkLCB4Y29kZVZlcnNpb24pO1xuICB9XG5cbiAgLyoqXG4gICAqIEBvdmVycmlkZVxuICAgKi9cbiAgYXN5bmMgZ2V0TGF1bmNoRGFlbW9uc1Jvb3QgKCkge1xuICAgIGNvbnN0IGRldlJvb3QgPSBhd2FpdCBnZXREZXZlbG9wZXJSb290KCk7XG4gICAgcmV0dXJuIHBhdGgucmVzb2x2ZShkZXZSb290LFxuICAgICAgJ1BsYXRmb3Jtcy9pUGhvbmVPUy5wbGF0Zm9ybS9MaWJyYXJ5L0RldmVsb3Blci9Db3JlU2ltdWxhdG9yL1Byb2ZpbGVzL1J1bnRpbWVzL2lPUy5zaW1ydW50aW1lL0NvbnRlbnRzL1Jlc291cmNlcy9SdW50aW1lUm9vdC9TeXN0ZW0vTGlicmFyeS9MYXVuY2hEYWVtb25zJyk7XG4gIH1cbn1cblxuZXhwb3J0IGRlZmF1bHQgU2ltdWxhdG9yWGNvZGUxMTtcbiJdLCJmaWxlIjoibGliL3NpbXVsYXRvci14Y29kZS0xMS5qcyIsInNvdXJjZVJvb3QiOiIuLi8uLiJ9
