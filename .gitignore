@@ -31,5 +31,6 @@ src/main/main.iml
 src/test/test.iml
 *.iml
 *.lst
+*.apk
 AutomationTestRunLogs.txt
 test-output
