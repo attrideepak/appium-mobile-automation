@@ -1,0 +1,43 @@
+Mobile app test cases
+
+Non-Functional
+Compatibility testing with different OS, screen size, resolution
+Integration with location/GPS/wifi
+Interface changes with change in screen orientation
+Opening deep links/PNs
+Sending app to background and bring infant from same state.
+Time taken to launch app.
+Updating the app
+Test in low device battery and charging condition
+Testing with/without network/slow networks
+Testing in low memory
+Unistall and install
+Portrait, landscape, split screen.
+
+
+Payment::
+
+Different card lengths
+Cart amount and payment amount is same.
+Check what happens if payment gateway stops responding during payment
+Check what happens if session time out
+Check what happens when app is in background during payment processing
+Check what happens when app is killed/device is turned off during payment processing.
+Check with saved card when it is expired.
+Check with blocked card.
+Click back button from payment gateway.
+Try to disconnect the internet connection while payment process is in progress.
+In case of auto submit OTP check for different templates.
+
+
+
+Search:
+Search against number of characters(min-max)
+Special character
+Should not crash when special characters are entered and search clicked
+Pagination/scrollable
+copy/paste
+Empty search
+History
+Autofill
+getting keypad or not

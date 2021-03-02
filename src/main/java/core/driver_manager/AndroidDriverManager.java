@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class AndroidDriverManager {
 
     private DesiredCapabilities capabilities;
-    private AppiumServerManager appiumServerManager;
+    private AppiumServerManager appiumServerManager = new AppiumServerManager();
     AppiumDriver appiumDriver;
     private static Logger logger = Logger.getLogger(AndroidDriverManager.class);
 
@@ -35,7 +35,7 @@ public class AndroidDriverManager {
             capabilities.setCapability("newCommandTimeout", 500); //seconds Appium will wait for a new command from the client before assuming the client quit and ending the session
            // capabilities.setCapability("unicodeKeyboard", true);
            // capabilities.setCapability("resetKeyboard", true);
-            capabilities.setCapability("automationName", "Espresso");
+            capabilities.setCapability("automationName", "Uiautomator2");
             capabilities.setCapability("systemPort", 8200 + new Random().nextInt(20));
             capabilities.merge(extraCapabilities());
         }else{

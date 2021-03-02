@@ -79,3 +79,27 @@ UIAutomator2 v/s Espresso
 built-in view synchronization that ensures element finding happens during idle periods in your app.
 
 For iOS automationName, app, platformName, deviceName
+
+
+Implicit Wait: Applied to all elements in a page.
+Explicit Wait: Applied to a particilar element based on some expected condition
+Fluent Wait: Check for a element at a given frequency until the wait time.
+
+Expected Conditions:
+visibilityOfElementLocated(By locator)
+visibilityOf(WebElement element)
+textToBePresentInElement(By locator, String text)
+titleContains(String title)
+presenceOfElementLocated(By locator)
+presenceOfAllElementsLocatedBy(By locator)
+invisibilityOfElementLocated(By locator)
+invisibilityOfElementWithText(By locator, String text)
+elementToBeClickable(By locator)
+stalenessOf(WebElement element)
+alertIsPresent()
+
+Exceptions:
+StaleElementReferenceException — if an item is available in the DOM at the time of the search, but after a while, at the time it is called, the DOM has changed.
+NoSuchElementException — if the item is not in the DOM at the time of the call.
+ElementNotVisibleException — if the item was found in the DOM but not visible on the page.
+MoveTargetOutOfBoundsException — if the item has changed coordinates.
