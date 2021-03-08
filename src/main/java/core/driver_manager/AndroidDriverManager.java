@@ -4,7 +4,9 @@ import core.appium_server_manager.AppiumServerManager;
 import core.configurations.BaseConfig;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -16,7 +18,7 @@ public class AndroidDriverManager {
 
     private DesiredCapabilities capabilities;
     private AppiumServerManager appiumServerManager = new AppiumServerManager();
-    AppiumDriver appiumDriver;
+    AppiumDriver appiumDriver = null;
     private static Logger logger = Logger.getLogger(AndroidDriverManager.class);
 
 
@@ -25,19 +27,20 @@ public class AndroidDriverManager {
         if(appName.toLowerCase().contains("zoomcar")) {
             String path = System.getProperty("user.dir")+"/src/main/resources/app-release.apk";
             File apk = new File(path);
-
-            capabilities.setCapability("app",apk);
+            capabilities.setCapability("app",apk.getAbsolutePath());
             capabilities.setCapability("platformName", "android");
             capabilities.setCapability("deviceName", "emulator-5554");
            // capabilities.setCapability("platformVersion", baseConfig.getDevice().getOsVersion());
-            capabilities.setCapability("appActivity", "com.zoomcar");
-            capabilities.setCapability("appPackage", "com.zoomcar.SplashActivity");
+            capabilities.setCapability("appPackage", "com.zoomcar");
+            capabilities.setCapability("appActivity", "com.zoomcar.activity.SplashActivity");
             capabilities.setCapability("newCommandTimeout", 500); //seconds Appium will wait for a new command from the client before assuming the client quit and ending the session
            // capabilities.setCapability("unicodeKeyboard", true);
            // capabilities.setCapability("resetKeyboard", true);
-            capabilities.setCapability("automationName", "Uiautomator2");
+            capabilities.setCapability("automationName", "UiAutomator2");
             capabilities.setCapability("systemPort", 8200 + new Random().nextInt(20));
             capabilities.merge(extraCapabilities());
+            logger.info("Capabilities are set");
+            logger.info(capabilities.toJson());
         }else{
             logger.info("App name is not correct");
         }
@@ -48,13 +51,15 @@ public class AndroidDriverManager {
             e.printStackTrace();
         }
         appiumDriver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        logger.info("Appium driver initiated");
         return appiumDriver;
     }
 
     private DesiredCapabilities extraCapabilities(){
-         capabilities = new DesiredCapabilities();
         //capabilities.setCapability("unicodeKeyboard", true);
         //capabilities.setCapability("resetKeyboard", true);
+        capabilities.setCapability(MobileCapabilityType.NO_RESET,true);
+       // capabilities.setCapability(MobileCapabilityType.FULL_RESET,false);
         return capabilities;
     }
 }

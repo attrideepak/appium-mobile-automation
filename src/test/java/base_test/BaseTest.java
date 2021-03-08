@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 
 public class BaseTest{
@@ -20,7 +21,7 @@ public class BaseTest{
         wait = new WebDriverWait(driver, 30);
     }
 
-
+    @AfterTest
     public void onFinish() {
         driver.quit();
     }

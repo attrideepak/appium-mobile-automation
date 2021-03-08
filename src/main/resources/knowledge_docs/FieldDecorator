@@ -1,0 +1,12 @@
+
+When you use the PageFactory, the webelements instances are actually proxies and the elements have to be found before you call a method on them.
+
+The getting part is encapsulated in the ElementLocator for each field. The ElementLocatorFactory provides these for each element.
+This factory needs a SearchContext provided to the factory constructor. The driver implements the SearchContext (the method findelement) or even a webelement.
+The By part that is how to look for them, is retrieved by reflection API on the fields of the pageobject.
+
+Assigning the proxies to the fields is handled by the FieldDecorator, which requires the ElementLocatorFactory. The decorate() method called for each webelement
+field returns a proxy which is set for that field. When a method is called on the webelement it actually is called on the proxy. The proxy intercepts this call to
+use the SearchContext.findElement method to find the actual element and then calls your original method.
+
+So one can create custom ElementLocatorFactory and FieldDecorator to pass to the PageFactory.

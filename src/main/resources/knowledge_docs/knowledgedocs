@@ -103,3 +103,10 @@ StaleElementReferenceException — if an item is available in the DOM at the tim
 NoSuchElementException — if the item is not in the DOM at the time of the call.
 ElementNotVisibleException — if the item was found in the DOM but not visible on the page.
 MoveTargetOutOfBoundsException — if the item has changed coordinates.
+
+
+The correct order of initialisation is:
+1. Static variable initialisers and static initialisation blocks, in textual order, if the class hasn't been previously initialised.
+2. The super() call in the constructor, whether explicit or implicit.
+3. Instance variable initialisers and instance initialisation blocks, in textual order.
+4. Remaining body of constructor after super().
