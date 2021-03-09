@@ -2,6 +2,7 @@ package core.driver_manager;
 
 import core.appium_server_manager.AppiumServerManager;
 import core.configurations.BaseConfig;
+import core.constants.Constants;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -21,6 +22,8 @@ public class AndroidDriverManager {
     AppiumDriver appiumDriver = null;
     private static Logger logger = Logger.getLogger(AndroidDriverManager.class);
 
+    String appPackage = Constants.PACKAGE_NAME.PROD_PACKAGE.getPackageName();
+
 
     public AppiumDriver getDriver(String appName){
         capabilities = new DesiredCapabilities();
@@ -31,7 +34,7 @@ public class AndroidDriverManager {
             capabilities.setCapability("platformName", "android");
             capabilities.setCapability("deviceName", "emulator-5554");
            // capabilities.setCapability("platformVersion", baseConfig.getDevice().getOsVersion());
-            capabilities.setCapability("appPackage", "com.zoomcar");
+            capabilities.setCapability("appPackage", appPackage);
             capabilities.setCapability("appActivity", "com.zoomcar.activity.SplashActivity");
             capabilities.setCapability("newCommandTimeout", 500); //seconds Appium will wait for a new command from the client before assuming the client quit and ending the session
            // capabilities.setCapability("unicodeKeyboard", true);
@@ -59,7 +62,10 @@ public class AndroidDriverManager {
         //capabilities.setCapability("unicodeKeyboard", true);
         //capabilities.setCapability("resetKeyboard", true);
         capabilities.setCapability(MobileCapabilityType.NO_RESET,true);
-       // capabilities.setCapability(MobileCapabilityType.FULL_RESET,false);
+        capabilities.setCapability("clearDeviceLogsOnStart", true);
+        capabilities.setCapability("printPageSourceOnFindFailure",true); //When a find operation fails, print the current page source. Useful for debugging and diagnosing test failures Value = true/false
+
+        // capabilities.setCapability(MobileCapabilityType.FULL_RESET,false);
         return capabilities;
     }
 }

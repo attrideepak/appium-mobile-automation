@@ -1,9 +1,11 @@
 package core.utils;
 
+import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidMobileCommandHelper;
 import io.appium.java_client.android.AndroidStartScreenRecordingOptions;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
@@ -14,9 +16,12 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.html5.Location;
 
+import java.io.IOException;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
 import static io.appium.java_client.touch.TapOptions.tapOptions;
@@ -29,12 +34,31 @@ public class MobileCommonActions extends CommonActions {
 
     private static Logger logger = Logger.getLogger(MobileCommonActions.class);
 
+        List<String> args = Arrays.asList(
+            "-s",
+            "com.zoomcar"
+    );
+    Map<String, Object> cmd = ImmutableMap.of(
+            "command", "pidof",
+            "args", args
+    );
+
+
+
+
+   public int getPackageId(){
+       String pid = (String) localAppiumDriver.executeScript("mobile: shell", cmd);
+       int packageId = Integer.parseInt(pid.replace("\n", ""));
+       return packageId;
+   }
+
     public MobileCommonActions(WebDriver localAppiumDriver) {
         super(localAppiumDriver);
         this.localAppiumDriver = (AppiumDriver) localAppiumDriver;
     }
 
     public void clickElement(WebElement myElement) {
+        localAppiumDriver.launchApp();
         waitForElementToBeClickable(myElement);
         try {
             myElement.click();
@@ -656,5 +680,47 @@ public class MobileCommonActions extends CommonActions {
         }
         return null;
     }
+
+    public static void removeAndroidApps(String appName, boolean onlyApp) {
+        CommandUtils commandUtils = new CommandUtils();
+        try {
+            if (!onlyApp) {
+                commandUtils.executeCommand("adb uninstall io.appium.uiautomator2.server");
+                commandUtils.executeCommand("adb uninstall io.appium.uiautomator2.server.test");
+                commandUtils.executeCommand("adb uninstall io.appium.unlock");
+                commandUtils.executeCommand("adb uninstall io.appium.settings");
+                logger.info("uninstalled appium files from devcie");
+            }
+            logger.info(
+                    "remove "
+                            + appName
+                            + " app : "
+                            + commandUtils.executeCommand(
+                            "adb uninstall "
+                                    + "com.zoomcar"));
+        } catch (InterruptedException e) {
+            logger.error(e.getMessage());
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+    }
+
+    public static String getAndroidAppVersion(String device, String packageName) {
+        try {
+            CommandUtils commandUtils = new CommandUtils();
+            return commandUtils
+                    .executeCommand(
+                            "adb -s " + device + " shell dumpsys package " + packageName + " | grep versionName")
+                    .trim()
+                    .split("=")[1];
+        } catch (InterruptedException e) {
+            logger.error(e.getMessage());
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+        return null;
+    }
+
+
 
 }

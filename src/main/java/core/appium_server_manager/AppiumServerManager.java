@@ -20,6 +20,7 @@ public class AppiumServerManager {
         builder.usingAnyFreePort();
         builder.withStartUpTimeOut(20000, TimeUnit.MILLISECONDS);
         builder.withArgument(GeneralServerFlag.LOG_LEVEL, "debug");
+        builder.withArgument(GeneralServerFlag.ALLOW_INSECURE,"adb_shell"); //Specify a list of features which will never be allowed to run, even if --relaxed-security
 
         service = AppiumDriverLocalService.buildService(builder);
         service.start();

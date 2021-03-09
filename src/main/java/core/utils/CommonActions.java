@@ -100,8 +100,6 @@ public class CommonActions {
         return enabled;
     }
 
-
-
     //@Attachment(value = "Page screenshot", type = "image/png")
     public byte[] takeScreenShot() {
         logger.info("taking screenshot!");

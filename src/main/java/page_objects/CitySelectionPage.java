@@ -5,26 +5,31 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.stream.StreamSupport;
 
 public class CitySelectionPage {
     private AppiumDriver localAppiumDriver;
     private MobileCommonActions mobileCommonActions;
     private static final String packageName = "com.zoomcar";
+    private static Logger logger = Logger.getLogger(CitySelectionPage.class);
 
     public CitySelectionPage(AppiumDriver driver){
         localAppiumDriver= driver;
         mobileCommonActions = new MobileCommonActions(localAppiumDriver);
-        //PageFactory.initElements(new AppiumFieldDecorator(this.driver),this);
+        PageFactory.initElements(new AppiumFieldDecorator(localAppiumDriver),this);
     }
 
-//    @AndroidFindBy(xpath = "//android.widget.TextView[@text='BANGALORE']")
-//    private WebElement banagloreCity;
-//
-//    @AndroidFindBy(id = packageName+":id/image_close")
-//    private WebElement closeBottomSheet;
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text='BANGALORE']")
+    private WebElement banagloreCity;
+
+    @AndroidFindBy(id = packageName+":id/image_close")
+    private WebElement closeBottomSheet;
 
 //    By city = MobileBy.xpath("//android.widget.TextView[@text='BANGALORE']");
 //    By bottomSheetCloseButton = MobileBy.id( packageName+":id/image_close");
@@ -32,21 +37,24 @@ public class CitySelectionPage {
 
     //implement select bangalore city
 
-//    public HomePage selectCityAndNaviagteToHomePage(){
-//        mobileCommonActions.clickElement(banagloreCity);
-//        mobileCommonActions.clickElement(closeBottomSheet);
-//        try {
-//            Thread.sleep(2000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        return new HomePage(this.driver);
-//    }
+    public HomePage selectCityAndNaviagteToHomePage(){
+        mobileCommonActions.clickElement(banagloreCity);
+        mobileCommonActions.clickElement(closeBottomSheet);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-//    public HomePage closeBottomSheet(){
-//        mobileCommonActions.clickElement(closeBottomSheet);
-//        return new HomePage(this.driver);
-//    }
+        return new HomePage(localAppiumDriver);
+    }
+
+    public HomePage closeBottomSheet(){
+        String pageSource =  localAppiumDriver.getPageSource();
+        logger.info("Page source "+pageSource);
+        mobileCommonActions.clickElement(closeBottomSheet);
+        return new HomePage(localAppiumDriver);
+    }
 
 //    public HomePage closeBottomSheet(){
 //        mobileCommonActions.clickElement(this.driver.findElement(bottomSheetCloseButton));
