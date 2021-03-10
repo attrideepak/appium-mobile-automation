@@ -1,6 +1,9 @@
 package base_test;
 
 import core.driver_manager.AndroidDriverManager;
+import core.utils.LogcatUtils;
+import core.utils.MobileCommonActions;
+import io.appium.java_client.AppiumDriver;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
@@ -20,6 +23,7 @@ public class BaseTest{
     public WebDriver driver;
     public WebDriverWait wait;
     String appName = "zoomcar";
+    private MobileCommonActions mobileCommonActions;
     private static Logger logger = Logger.getLogger(BaseTest.class);
 
 
@@ -27,14 +31,6 @@ public class BaseTest{
     public void onStart() {
         driver = new AndroidDriverManager().getDriver(appName);
         wait = new WebDriverWait(driver, 30);
-//        Set<String> logsTypes = driver.manage().logs().getAvailableLogTypes();
-//        logger.info("Getting logcats");
-//        LogEntries logEnteries = driver.manage().logs().get("logcat");
-//        logger.info("First and last ten lines of log: ");
-//        StreamSupport.stream(logEnteries.spliterator(), false).limit(10).forEach(System.out::println);
-//        logger.info("**********************");
-//        StreamSupport.stream(logEnteries.spliterator(), false).skip(logEnteries.getAll().size() - 10).forEach(System.out::println);
-
     }
 
     @AfterTest

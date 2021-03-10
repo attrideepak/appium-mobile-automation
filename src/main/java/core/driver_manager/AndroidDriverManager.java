@@ -22,13 +22,13 @@ public class AndroidDriverManager {
     AppiumDriver appiumDriver = null;
     private static Logger logger = Logger.getLogger(AndroidDriverManager.class);
 
-    String appPackage = Constants.PACKAGE_NAME.PROD_PACKAGE.getPackageName();
+    String appPackage = Constants.PACKAGE_NAME.DEBUG_PACKAGE.getPackageName();
 
 
     public AppiumDriver getDriver(String appName){
         capabilities = new DesiredCapabilities();
         if(appName.toLowerCase().contains("zoomcar")) {
-            String path = System.getProperty("user.dir")+"/src/main/resources/app-release.apk";
+            String path = System.getProperty("user.dir")+"/src/main/resources/app-debug.apk";
             File apk = new File(path);
             capabilities.setCapability("app",apk.getAbsolutePath());
             capabilities.setCapability("platformName", "android");
@@ -37,8 +37,10 @@ public class AndroidDriverManager {
             capabilities.setCapability("appPackage", appPackage);
             capabilities.setCapability("appActivity", "com.zoomcar.activity.SplashActivity");
             capabilities.setCapability("newCommandTimeout", 500); //seconds Appium will wait for a new command from the client before assuming the client quit and ending the session
-           // capabilities.setCapability("unicodeKeyboard", true);
-           // capabilities.setCapability("resetKeyboard", true);
+            //	Enable Unicode input, default
+            capabilities.setCapability("unicodeKeyboard", true);
+            //Reset keyboard to its original state, after running Unicode tests with unicodeKeyboard capability. Ignored if used alone. Default false
+            capabilities.setCapability("resetKeyboard", true);
             capabilities.setCapability("automationName", "UiAutomator2");
             capabilities.setCapability("systemPort", 8200 + new Random().nextInt(20));
             capabilities.merge(extraCapabilities());
@@ -62,10 +64,16 @@ public class AndroidDriverManager {
         //capabilities.setCapability("unicodeKeyboard", true);
         //capabilities.setCapability("resetKeyboard", true);
         capabilities.setCapability(MobileCapabilityType.NO_RESET,true);
-        capabilities.setCapability("clearDeviceLogsOnStart", true);
-        capabilities.setCapability("printPageSourceOnFindFailure",true); //When a find operation fails, print the current page source. Useful for debugging and diagnosing test failures Value = true/false
-
         // capabilities.setCapability(MobileCapabilityType.FULL_RESET,false);
+        capabilities.setCapability("clearDeviceLogsOnStart", true);
+        //When a find operation fails, print the current page source. Useful for debugging and diagnosing test failures Value = true/false
+        capabilities.setCapability("printPageSourceOnFindFailure",true);
+        //This capability will set the network condition which will be required for your test.
+        // For Ex. if you want to test your app in a cellular data condition you can mock it in the emulator with the help of given capability.
+        // Note: This is not compatible for Real devices.
+        capabilities.setCapability("networkSpeed", "gprs");
+        //capabilities.setCapability("isHeadless", true); //Set this capability to true to run emulators or simulators in headless mode.
+
         return capabilities;
     }
 }

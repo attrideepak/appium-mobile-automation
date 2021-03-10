@@ -16,7 +16,7 @@ import java.util.stream.StreamSupport;
 public class CitySelectionPage {
     private AppiumDriver localAppiumDriver;
     private MobileCommonActions mobileCommonActions;
-    private static final String packageName = "com.zoomcar";
+    private static final String packageName = "com.zoomcar.debug";
     private static Logger logger = Logger.getLogger(CitySelectionPage.class);
 
     public CitySelectionPage(AppiumDriver driver){
@@ -50,8 +50,6 @@ public class CitySelectionPage {
     }
 
     public HomePage closeBottomSheet(){
-        String pageSource =  localAppiumDriver.getPageSource();
-        logger.info("Page source "+pageSource);
         mobileCommonActions.clickElement(closeBottomSheet);
         return new HomePage(localAppiumDriver);
     }

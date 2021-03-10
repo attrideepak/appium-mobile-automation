@@ -10,7 +10,7 @@ public class LogcatUtils {
     private static Logger logger = Logger.getLogger(LogcatUtils.class);
 
 
-    public static void getFirstNLines(int n,AppiumDriver localAppiumDriver){
+    public static void getFirstNLinesofLogcats(int n, AppiumDriver localAppiumDriver){
         logger.info("Getting logcats");
         LogEntries logEnteries = localAppiumDriver.manage().logs().get("logcat");
         logger.info("First "+n+ " lines of log: ");
@@ -18,7 +18,7 @@ public class LogcatUtils {
         logger.info("**********************");
     }
 
-    public static void getLastNLines(int n,AppiumDriver localAppiumDriver){
+    public static void getLastNLinesofLogcats(int n, AppiumDriver localAppiumDriver){
         logger.info("Getting logcats");
         LogEntries logEnteries = localAppiumDriver.manage().logs().get("logcat");
         logger.info("Last "+n+ " lines of log: ");
@@ -26,12 +26,22 @@ public class LogcatUtils {
         logger.info("**********************");
     }
 
-    public static void getPackageSpecificLogs(AppiumDriver localAppiumDriver,int packageId){
+    public static void getPackageSpecificLogcats(AppiumDriver localAppiumDriver, int packageId){
         LogEntries logEnteries = localAppiumDriver.manage().logs().get("logcat");
         logger.info("Getting logcats");
         StreamSupport.stream(logEnteries.spliterator(), false)
                 .filter(s -> s.toString()
                         .contains(String.valueOf(packageId)))
+                .forEach(System.out::println);
+        logger.info("**********************");
+    }
+
+    public static void getPackageSpecificLogcatsFilteredByString(AppiumDriver localAppiumDriver, int packageId,String key){
+        LogEntries logEnteries = localAppiumDriver.manage().logs().get("logcat");
+        logger.info("Getting logcats");
+        StreamSupport.stream(logEnteries.spliterator(), false)
+                .filter(s -> s.toString()
+                        .contains(String.valueOf(packageId))).filter(s-> s.toString().contains(key))
                 .forEach(System.out::println);
         logger.info("**********************");
     }

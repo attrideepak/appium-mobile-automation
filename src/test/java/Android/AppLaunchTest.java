@@ -43,7 +43,7 @@ public class AppLaunchTest extends BaseTest {
 
     @Test
     public void launchHomePage(){
-        LogcatUtils.getFirstNLines(100,localAppiumDriver,mobileCommonActions.getPackageId());
+
         citySelectionPage.closeBottomSheet();
     }
 }

@@ -1,6 +1,7 @@
 package core.utils;
 
 import com.google.common.collect.ImmutableMap;
+import core.constants.Constants;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
@@ -32,21 +33,22 @@ import static java.time.Duration.ofSeconds;
 public class MobileCommonActions extends CommonActions {
     public AppiumDriver localAppiumDriver;
 
+    String packageName = Constants.PACKAGE_NAME.DEBUG_PACKAGE.getPackageName();
+
     private static Logger logger = Logger.getLogger(MobileCommonActions.class);
-
-        List<String> args = Arrays.asList(
-            "-s",
-            "com.zoomcar"
-    );
-    Map<String, Object> cmd = ImmutableMap.of(
-            "command", "pidof",
-            "args", args
-    );
-
-
 
 
    public int getPackageId(){
+       List<String> args = Arrays.asList(
+               "-s",
+               packageName
+       );
+
+       Map<String, Object> cmd = ImmutableMap.of(
+               "command", "pidof",
+               "args", args
+       );
+
        String pid = (String) localAppiumDriver.executeScript("mobile: shell", cmd);
        int packageId = Integer.parseInt(pid.replace("\n", ""));
        return packageId;
@@ -58,7 +60,6 @@ public class MobileCommonActions extends CommonActions {
     }
 
     public void clickElement(WebElement myElement) {
-        localAppiumDriver.launchApp();
         waitForElementToBeClickable(myElement);
         try {
             myElement.click();

@@ -14,7 +14,7 @@ public enum  Constants {
         }
 
         public String getPackageName(){
-            return getPackageName();
+            return packageName;
         }
 
     }
