@@ -1,6 +1,7 @@
 package Android;
 
 import base_test.BaseTest;
+import core.constants.Constants;
 import core.utils.LogcatUtils;
 import core.utils.MobileCommonActions;
 import io.appium.java_client.AppiumDriver;
@@ -45,9 +46,7 @@ public class AppLaunchTest extends BaseTest {
 
     @Test
     public void launchHomePage(){
-
-       Capabilities capabilities = localAppiumDriver.getCapabilities();
-       logger.info("Capabilities: "+capabilities.asMap());
-        citySelectionPage.closeBottomSheet();
+       citySelectionPage.closeBottomSheet();
+       mobileCommonActions.launchAnotherApp("com.google.android.deskclock","com.android.deskclock.DeskClock");
     }
 }

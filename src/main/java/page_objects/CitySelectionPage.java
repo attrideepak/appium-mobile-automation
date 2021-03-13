@@ -51,8 +51,6 @@ public class CitySelectionPage {
 
     public HomePage closeBottomSheet(){
         mobileCommonActions.clickElement(closeBottomSheet);
-        logger.info("************************* Get context handles: "+localAppiumDriver.getContextHandles().toString());
-        logger.info("************************* Get Context: "+localAppiumDriver.getContext());
         return new HomePage(localAppiumDriver);
     }
 

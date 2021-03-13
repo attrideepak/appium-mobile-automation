@@ -35,10 +35,10 @@ public class CommandUtils {
         return new BufferedReader(isr);
     }
 
-    public String executeCommand(String command) throws InterruptedException, IOException {
+    public String executeCommand(String command) throws IOException {
         logger.debug("command to execute : " + command);
         BufferedReader br = getBufferedReader(command);
-        String line;
+        String line = null;
         String cmdResponse = "";
         while ((line = br.readLine()) != null) {
             cmdResponse = String.format("%s%s\n", cmdResponse, line);

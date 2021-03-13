@@ -6,10 +6,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.android.AndroidMobileCommandHelper;
-import io.appium.java_client.android.AndroidStartScreenRecordingOptions;
-import io.appium.java_client.android.AndroidTouchAction;
+import io.appium.java_client.android.*;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.android.nativekey.KeyEventMetaModifier;
@@ -703,9 +700,7 @@ public class MobileCommonActions extends CommonActions {
                             + commandUtils.executeCommand(
                             "adb uninstall "
                                     + "com.zoomcar"));
-        } catch (InterruptedException e) {
-            logger.error(e.getMessage());
-        } catch (IOException e) {
+        }  catch (IOException e) {
             logger.error(e.getMessage());
         }
     }
@@ -718,9 +713,7 @@ public class MobileCommonActions extends CommonActions {
                             "adb -s " + device + " shell dumpsys package " + packageName + " | grep versionName")
                     .trim()
                     .split("=")[1];
-        } catch (InterruptedException e) {
-            logger.error(e.getMessage());
-        } catch (IOException e) {
+        }  catch (IOException e) {
             logger.error(e.getMessage());
         }
         return null;
@@ -770,6 +763,12 @@ public class MobileCommonActions extends CommonActions {
 
     public void stoptRecording(){
         ((CanRecordScreen) localAppiumDriver).stopRecordingScreen();
+    }
+
+    public void launchAnotherApp(String appPackageName, String appActivityName){
+        Activity activity = new Activity(appPackageName, appActivityName);
+        activity.setStopApp(false);
+        ((AndroidDriver<MobileElement>) localAppiumDriver).startActivity(activity);
     }
 
 }

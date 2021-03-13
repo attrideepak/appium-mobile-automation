@@ -1,13 +1,11 @@
 package core.driver_manager;
 
 import core.appium_server_manager.AppiumServerManager;
-import core.configurations.BaseConfig;
 import core.constants.Constants;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;

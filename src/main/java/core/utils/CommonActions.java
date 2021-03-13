@@ -1,5 +1,7 @@
 package core.utils;
 
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidStartScreenRecordingOptions;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
@@ -15,6 +17,8 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.util.Base64;
 
 
 public class CommonActions {
@@ -139,6 +143,42 @@ public class CommonActions {
         } catch (IOException e) {
             logger.error("attachment error");
         }
+    }
+
+    public void startScreenRecord(AndroidDriver androidDriver) {
+        try {
+            androidDriver.startRecordingScreen(
+                    new AndroidStartScreenRecordingOptions().withTimeLimit(Duration.ofMinutes(15)));
+            logger.info("screen record started");
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+    }
+
+    public byte[] stopScreenRecord(AndroidDriver androidDriver) {
+        try {
+            Thread.sleep(1000);
+            String video = androidDriver.stopRecordingScreen();
+            logger.info("screen record stopped");
+            return Base64.getMimeDecoder().decode(video);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+        return null;
+    }
+
+    public static String getAndroidAppVersion(String device, String packageName) {
+        try {
+            CommandUtils commandUtils = new CommandUtils();
+            return commandUtils
+                    .executeCommand(
+                            "adb -s " + device + " shell dumpsys package " + packageName + " | grep versionName")
+                    .trim()
+                    .split("=")[1];
+        } catch (IOException e) {
+            logger.error(e.getMessage());
+        }
+        return null;
     }
 
 }
