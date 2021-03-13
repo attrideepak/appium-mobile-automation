@@ -1,0 +1,120 @@
+Q1:How to find X and Y co-ordinate of a particular element?
+WebElement acceptButton= driver.findElement(By.xpath("//android.widget.Button[@resource-id='com.zoomcar.com:id/accept']"));
+By this below script we can get the xcordinate of the particular element
+acceptButton.getLocation().getX();
+By this below script we can get the Ycordinate of the particular element
+acceptButton.getLocation().getY();
+
+Q2:How to go to forward page using Appium?
+driver.forward();
+
+Q3:How to send Emoji to a text box in android device using appium?
+capabilities.setCapability("unicodeKeyboard", true);
+capabilities.setCapability("resetKeybord", true);
+/***code for sending emoji***/
+String ballEmoji = "\u26BD";
+driver.findElement(By.xpath("")).sendKeys(ballEmoji);
+
+Q4: How to select all text using Appium?
+river.findElement(By.name("q")).sendKeys(Keys.chord(Keys.CONTROL, "a"));
+
+How to find the current time in android device using appium?
+driver.getDeviceTime();
+
+How to run headless test for Emulators or Simulators in Appium?
+capabilities.setCapability("isHeadless", true);
+
+How to get the current orientation of the device in Appium?
+ScreenOrientation pOrientation = driver.getOrientation();
+
+How to rotate screen in android device using appium?
+driver.rotate(ScreenOrientation.LANDSCAPE);
+
+How to check android device is locked or not using Appium?
+boolean isLocked = driver.isDeviceLocked();
+
+How to lock a device for fix period of time?
+Duration time = null;
+((AndroidDriver) driver).lockDevice(time.ofMinutes(3));
+
+How to lock any device using appium?
+driver.lockDevice();
+
+How to unlock any device using appium?
+driver.unlockDevice();
+
+How to open Notification bar in android devices using appium ?
+((AndroidDriver) driver).openNotifications();
+
+How to know keyboard Shown or not?
+boolean isKeyboardShown = ((HasDeviceDetails) driver).isKeyboardShown();
+
+How to get the keyboard in appium ?
+Keyboard KeyboardName = driver.getKeyboard();
+
+How to hide keyboard in android devices?
+driver.hideKeyboard();
+
+How to perform multiple touch on any device?
+TouchAction fingerOne = new TouchAction(driver);
+TouchAction fingerTwo = new TouchAction(driver);
+MultiTouchAction action = new MultiTouchAction(driver);
+
+fingerOne.press(20, 20);
+fingerOne.moveTo(10, 100);
+fingerOne.release();
+
+fingerTwo.press(30, 30);
+fingerTwo.moveTo(20, 200);
+fingerTwo.release();
+
+action.add(fingerOne);
+action.add(fingerTwo);
+action.perform();
+
+How to perform pinch out operation in android device using appium?
+AndroidTouchAction firstFinger= new AndroidTouchAction(driver);
+firstFinger.press(PointOption.point(xOffset, yOffset-200)).moveTo(PointOption.point(xOffset, yOffset-20));
+
+AndroidTouchAction secondFnger= new AndroidTouchAction(driver);
+secondFnger.press(PointOption.point(xOffset, yOffset+200)).moveTo(PointOption.point(xOffset, yOffset+20));
+
+MultiTouchAction action = new MultiTouchAction(driver);
+action.add(firstFinger).add(secondFnger).perform();
+
+How to perform pinch in operation in android device using appium?
+AndroidTouchAction firstFinger= new AndroidTouchAction(driver);
+firstFinger.press(PointOption.point(xOffset, yOffset-20)).moveTo(PointOption.point(xOffset, yOffset-200));
+
+AndroidTouchAction secondFnger= new AndroidTouchAction(driver);
+secondFnger.press(PointOption.point(xOffset, yOffset+20)).moveTo(PointOption.point(xOffset, yOffset+200));
+
+MultiTouchAction action= new MultiTouchAction(driver);
+action.add(firstFinger).add(secondFnger).perform();
+
+
+How to get cookie information as JSON?
+Cookie cookie = driver.manage().getCookieNamed("1P_JAR");
+Map jsonObject = cookie1.toJson();
+
+How to get all cookies information in Appium?
+Set cookies = driver.manage().getCookies();
+
+How to delete all the cookies using appium?
+driver.manage().deleteAllCookies();
+
+How to remove cookie by name in Appium?
+driver.manage().deleteCookieNamed("cookie_name");
+
+How to take screenShot?
+File file = driver.getScreenshotAs(OutputType.FILE);
+FileUtils.copyFile(file, new File("myScreenshot.png");
+
+How to get all context in the Appium?
+Set pContext = driver.getContextHandles();
+
+How to get the context of the app in Appium?
+String pContext = driver.getContext();
+
+What is needed to automate webview inside native app?
+setWebContentsDebuggingEnabled = true

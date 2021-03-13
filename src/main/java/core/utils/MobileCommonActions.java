@@ -4,15 +4,19 @@ import com.google.common.collect.ImmutableMap;
 import core.constants.Constants;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidMobileCommandHelper;
 import io.appium.java_client.android.AndroidStartScreenRecordingOptions;
+import io.appium.java_client.android.AndroidTouchAction;
 import io.appium.java_client.android.nativekey.AndroidKey;
 import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.android.nativekey.KeyEventMetaModifier;
+import io.appium.java_client.screenrecording.CanRecordScreen;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+import io.appium.java_client.windows.PressesKeyCode;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.html5.Location;
@@ -722,6 +726,50 @@ public class MobileCommonActions extends CommonActions {
         return null;
     }
 
+   // How to check if current Orientation is Portrait?
+   public boolean isCurrentOrientationPortrait() {
+       String ort = localAppiumDriver.getOrientation().name();
+       ScreenOrientation orientation = ScreenOrientation.valueOf(ort);
 
+       if (orientation == ScreenOrientation.PORTRAIT) {
+           return true;
+
+       } else {
+           return false;
+       }
+   }
+
+
+  //  How to check if current Orientation is LandScape?
+  public boolean isCurrentOrientationLandScape() {
+        String ort = localAppiumDriver.getOrientation().name();
+      ScreenOrientation orientation = ScreenOrientation.valueOf(ort);
+
+      if (orientation == ScreenOrientation.LANDSCAPE) {
+          return true;
+      } else {
+          return false;
+      }
+  }
+
+  //How to perform double click in android device using appium?
+  public void doubleClick(MobileElement mobileElement){
+      AndroidTouchAction touch = new AndroidTouchAction(localAppiumDriver);
+      touch.press(PointOption.point(150, 200))
+              .release()
+              .perform()
+              .waitAction(WaitOptions.waitOptions(Duration.ofMillis(50))).
+              press(PointOption.point(100,300))
+              .release()
+              .perform();
+  }
+
+  public void startRecording(){
+      ((CanRecordScreen) localAppiumDriver).startRecordingScreen();
+  }
+
+    public void stoptRecording(){
+        ((CanRecordScreen) localAppiumDriver).stopRecordingScreen();
+    }
 
 }

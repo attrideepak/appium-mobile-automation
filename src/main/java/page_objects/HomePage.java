@@ -4,15 +4,20 @@ import core.utils.MobileCommonActions;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
+
 
 public class HomePage {
 
     private AppiumDriver localAppiumDriver;
     private MobileCommonActions mobileCommonActions;
     private static final String packageName = "com.zoomcar.debug";
+    private static Logger logger = Logger.getLogger(HomePage.class);
 
     public HomePage(AppiumDriver driver){
         localAppiumDriver = driver;
@@ -39,10 +44,20 @@ public class HomePage {
     @AndroidFindBy(accessibility = "Navigate up")
     private WebElement menuButton;
 
+    @AndroidFindBy(id = packageName+":id/image")
+    private List<WebElement> homePageWebViews;
+
     public LoginSignUpPage navigateToLoginSignUpPage(){
         mobileCommonActions.clickElement(menuButton);
         mobileCommonActions.clickElement(loginSignUpButton);
         return new LoginSignUpPage(localAppiumDriver);
+    }
+
+    public WebViewPage clickOnWebView(){
+        mobileCommonActions.clickElement(homePageWebViews.get(3));
+        logger.info("************************* Get Context Handles: "+localAppiumDriver.getContextHandles().toString());
+        logger.info("************************* Get Context: "+localAppiumDriver.getContext());
+        return new WebViewPage(localAppiumDriver);
     }
 
 }

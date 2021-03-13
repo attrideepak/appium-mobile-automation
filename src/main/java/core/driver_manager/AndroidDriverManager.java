@@ -61,8 +61,6 @@ public class AndroidDriverManager {
     }
 
     private DesiredCapabilities extraCapabilities(){
-        //capabilities.setCapability("unicodeKeyboard", true);
-        //capabilities.setCapability("resetKeyboard", true);
         capabilities.setCapability(MobileCapabilityType.NO_RESET,true);
         // capabilities.setCapability(MobileCapabilityType.FULL_RESET,false);
         capabilities.setCapability("clearDeviceLogsOnStart", true);
@@ -73,6 +71,16 @@ public class AndroidDriverManager {
         // Note: This is not compatible for Real devices.
         capabilities.setCapability("networkSpeed", "gprs");
         //capabilities.setCapability("isHeadless", true); //Set this capability to true to run emulators or simulators in headless mode.
+       // capabilities.setCapability("unlockType","pattern");  //['pin', 'password', 'pattern', 'fingerprint']
+       // capabilities.setCapability("unlockKey","1111");  //We treat the pattern pins as the numbers of a phone dial. So in this case the unlockKey would be 729854163
+        //Maximum frequency of keystrokes for typing and clearing a text field. If your tests are failing because of typing errors, you may want to
+        //adjust this. Values in keystroked per minute.
+       // capabilities.setCapability("maxTypingFrequency",15);
+        //capabilities.setCapability("screenShotOnError", true);
+        //capabilities.setCapability("autoWebview", true);
+//       Have Appium automatically determine which permissions your app requires and grant them to the app on install.
+//     Defaults to false.If noReset is true, this capability doesn't work.
+        capabilities.setCapability("autoGrantPermissions",true);
 
         return capabilities;
     }

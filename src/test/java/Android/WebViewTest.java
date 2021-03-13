@@ -1,22 +1,17 @@
 package Android;
 
 import base_test.BaseTest;
-import core.utils.LogcatUtils;
 import core.utils.MobileCommonActions;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.Capabilities;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import page_objects.AppLaunchPage;
 import page_objects.CitySelectionPage;
 import page_objects.HomePage;
 import page_objects.LocationAccessPage;
 
-//@Listeners(BaseTest.class)
-public class AppLaunchTest extends BaseTest {
+public class WebViewTest extends BaseTest {
     private AppLaunchPage appLaunchPage;
     private LocationAccessPage locationAccessPage;
     private CitySelectionPage citySelectionPage;
@@ -24,7 +19,7 @@ public class AppLaunchTest extends BaseTest {
     private MobileCommonActions mobileCommonActions;
 
     private AppiumDriver localAppiumDriver;
-    private static Logger logger = Logger.getLogger(AppLaunchTest.class);
+    private static Logger logger = Logger.getLogger(WebViewTest.class);
 
     @BeforeClass
     public void beforeClass(){
@@ -37,17 +32,13 @@ public class AppLaunchTest extends BaseTest {
     }
 
     @Test
-    public void launchAppAndNavigateToHomePage(){
+    public void navigateWebViewTest(){
+        citySelectionPage.closeBottomSheet().clickOnWebView().clickViewAllCars();
 
-        appLaunchPage.navigateToLocationAccessPage().clickCrossButton().selectCityAndNaviagteToHomePage();
-
-    }
-
-    @Test
-    public void launchHomePage(){
-
-       Capabilities capabilities = localAppiumDriver.getCapabilities();
-       logger.info("Capabilities: "+capabilities.asMap());
-        citySelectionPage.closeBottomSheet();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
