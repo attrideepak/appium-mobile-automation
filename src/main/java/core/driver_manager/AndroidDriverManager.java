@@ -63,4 +63,6 @@ public class AndroidDriverManager {
         // capabilities.setCapability(MobileCapabilityType.FULL_RESET,false);
         return capabilities;
     }
+
+
 }

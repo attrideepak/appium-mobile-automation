@@ -34,3 +34,4 @@ src/test/test.iml
 *.apk
 AutomationTestRunLogs.txt
 test-output
+/resources/chromedriver
