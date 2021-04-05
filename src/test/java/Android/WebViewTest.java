@@ -4,6 +4,7 @@ import base_test.BaseTest;
 import core.utils.MobileCommonActions;
 import io.appium.java_client.AppiumDriver;
 import org.apache.log4j.Logger;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import page_objects.AppLaunchPage;
@@ -29,6 +30,7 @@ public class WebViewTest extends BaseTest {
         citySelectionPage = new CitySelectionPage(localAppiumDriver);
         mobileCommonActions = new MobileCommonActions(localAppiumDriver);
         homePage = new HomePage(localAppiumDriver);
+
     }
 
     @Test

@@ -61,6 +61,8 @@ public class AndroidDriverManager {
     private DesiredCapabilities extraCapabilities(){
         capabilities.setCapability(MobileCapabilityType.NO_RESET,true);
         // capabilities.setCapability(MobileCapabilityType.FULL_RESET,false);
+        capabilities.setCapability("unlockType","pin");
+        capabilities.setCapability("unlockKey","1234");
         return capabilities;
     }
 

@@ -31,7 +31,7 @@ public class BaseTest{
 
     @Parameters({"platform","browserName"})
     @BeforeTest
-    public void onStart(@Optional(value = "web") String platform,@Optional(value = "chrome") String browserName) {
+    public void onStart(@Optional(value = "android") String platform,@Optional(value = "chrome") String browserName) {
         if (platform.equalsIgnoreCase("android")) {
             driver = new AndroidDriverManager().getDriver(appName);
             wait = new WebDriverWait(driver, 30);

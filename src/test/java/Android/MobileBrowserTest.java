@@ -4,6 +4,7 @@ import base_test.BaseTest;
 import core.utils.MobileCommonActions;
 import io.appium.java_client.AppiumDriver;
 import org.apache.log4j.Logger;
+import org.testng.ITestResult;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -13,7 +14,7 @@ public class MobileBrowserTest extends BaseTest {
     private static Logger logger = Logger.getLogger(MobileBrowserTest.class);
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass(ITestResult iTestResult){
         localAppiumDriver = (AppiumDriver) super.driver;
     }
 

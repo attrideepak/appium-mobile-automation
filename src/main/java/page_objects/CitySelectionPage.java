@@ -31,11 +31,6 @@ public class CitySelectionPage {
     @AndroidFindBy(id = packageName+":id/image_close")
     private WebElement closeBottomSheet;
 
-//    By city = MobileBy.xpath("//android.widget.TextView[@text='BANGALORE']");
-//    By bottomSheetCloseButton = MobileBy.id( packageName+":id/image_close");
-
-
-    //implement select bangalore city
 
     public HomePage selectCityAndNaviagteToHomePage(){
         mobileCommonActions.clickElement(banagloreCity);

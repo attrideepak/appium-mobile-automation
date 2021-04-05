@@ -4,6 +4,8 @@ import base_test.BaseTest;
 import core.utils.LogcatUtils;
 import core.utils.MobileCommonActions;
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.apache.log4j.Logger;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -41,6 +43,7 @@ public class LoginTest extends BaseTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+       
         LogcatUtils.getFirstNLinesofLogcats(200,localAppiumDriver);
 
 

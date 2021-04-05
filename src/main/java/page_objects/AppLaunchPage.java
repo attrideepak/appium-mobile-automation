@@ -25,8 +25,7 @@ public class AppLaunchPage {
 
     @AndroidFindBy(id = packageName+":id/button_continue")
     private WebElement getStartedButton;
-    //  By element = MobileBy.id(packageName+":id/button_continue");
-    //    private AndroidElement getStartedButton = (AndroidElement)localAppiumDriver.findElementById((packageName+":id/button_continue"));
+
 
     public LocationAccessPage navigateToLocationAccessPage() {
         mobileCommonActions.bringAppInForeground(packageName);
@@ -34,8 +33,6 @@ public class AppLaunchPage {
                 packageName+":id/image_tutorial", "GET STARTED");
         mobileCommonActions.clickElement(getStartedButton);
         return  new LocationAccessPage(localAppiumDriver);
-//        WebElement element = localAppiumDriver.findElement(MobileBy.id(packageName+":id/button_continue"));
-//        mobileCommonActions.clickElement(localAppiumDriver.findElement(element));
     }
 
 
